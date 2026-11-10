@@ -7,6 +7,8 @@
 ## 目录
 
 <!-- BEGIN:POSTS -->
+### 中文
+
 **2026**
 
 - 2026-06-01 · [华语乐坛：听众并不无辜](posts/huayu-yuetan-tingzhong.md) — 批评华语乐坛的声音从不缺席，但“听众无辜”这条公理没人质疑。这篇举三种人：厚古薄今的、只听词的、动辄觉得被冒犯的。 `流行音乐` `听众` `文化批评`
@@ -15,7 +17,17 @@
 
 - 2025-06-01 · [论我为什么不喜欢辩论赛——以及为什么私人辩论是更优解](posts/bu-xihuan-bianlunsai.md) — 辩论赛引入评委、放任诡辩、把复杂问题压成二元对立；私人辩论没有这些毛病。 `辩论` `公共讨论`
 
-_共 2 篇已发布。_
+**2024**
+
+- 2024-10-01 · [现代人音乐审美自救办法](posts/yinyue-shenmei-zijiu.md) — 从别看歌词、重夺注意力、按专辑听歌到打开心态，一套把歌听深的办法。 `流行音乐` `审美`
+
+### English
+
+**2026**
+
+- 2026-06-25 · [Mandopop — The Audience Is Not Blameless](posts/mandopop-audience-not-blameless.md) — Criticism of Mandopop never stops, but the idea that the audience is blameless rarely gets questioned. Three kinds of listeners say otherwise.
+
+_共 4 篇已发布（中文 3 篇，英文 1 篇）。_
 <!-- END:POSTS -->
 
 ## 关于
