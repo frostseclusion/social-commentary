@@ -1,0 +1,40 @@
+name: check
+
+# 每次改动文章就跑一次自检：frontmatter 是否齐全、slug 是否重复、图片是否真的存在。
+# 校验通过后顺手把 README 目录和 feed 重排一遍并提交回去 —— 目录永远不用手写。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 校验
+        run: node scripts/build.mjs --check
+
+      - name: 重建目录与 feed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          node scripts/build.mjs
+          if ! git diff --quiet -- README.md feed.xml; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md feed.xml
+            git commit -m "chore: 重建目录与 feed [skip ci]"
+            git push
+          else
+            echo "目录无变化，跳过提交"
+          fi
