@@ -4,6 +4,8 @@
 
 「雪蘅的文集」的一个分册。文学评论在 [literary-criticism](https://github.com/frostseclusion/literary-criticism)，汇总页在 [essays](https://github.com/frostseclusion/essays)。
 
+讨论、勘误、选题，都在 [Discussions](https://github.com/frostseclusion/social-commentary/discussions)。
+
 ## 目录
 
 <!-- BEGIN:POSTS -->
