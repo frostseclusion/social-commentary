@@ -72,6 +72,12 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
   if (data.status && !['draft', 'published', 'retired'].includes(data.status)) {
     errors.push(`${rel}: status 只能是 draft / published / retired`);
   }
+  if (data.lang && !['zh', 'en'].includes(data.lang)) {
+    errors.push(`${rel}: lang 只能是 zh（中文，可省略）或 en（英文）`);
+  }
+  if (data.status === 'published' && data.lang === 'en' && !data.translation_of) {
+    warnings.push(`${rel}: 英文文章没有写 translation_of，读者找不到对应的中文版`);
+  }
   if (data.date && Number.isNaN(Date.parse(data.date))) errors.push(`${rel}: date 无法解析`);
   if (/^#\s/.test(body.trimStart())) {
     errors.push(`${rel}: 正文不要再写一级标题（#），标题由 frontmatter 的 title 提供，否则页面里会出现两个标题`);
@@ -92,6 +98,11 @@ for (const p of posts) {
   if (seen.has(p.slug)) errors.push(`slug 重复：${p.slug}`);
   seen.add(p.slug);
 }
+for (const p of posts) {
+  if (!p.translation_of) continue;
+  if (p.translation_of === p.slug) errors.push(`${p.rel}: translation_of 不能指向自己`);
+  else if (!seen.has(p.translation_of)) errors.push(`${p.rel}: translation_of 指向的 ${p.translation_of} 不存在`);
+}
 
 if (errors.length) {
   console.error('发现问题：');
@@ -108,26 +119,40 @@ if (errors.length || CHECK_ONLY) {
 
 const published = posts.filter((p) => p.status === 'published').sort((a, b) => (a.date < b.date ? 1 : -1));
 const draftCount = posts.filter((p) => p.status === 'draft').length;
-const lines = [];
-if (published.length === 0) {
-  lines.push('_还没有文章。_');
-} else {
+
+// 同一册里既有中文又有英文时，目录按语言分节；只有一种语言时不加节标题。
+function renderGroup(list) {
+  const out = [];
   const byYear = new Map();
-  for (const p of published) {
+  for (const p of list) {
     const y = p.date.slice(0, 4);
     if (!byYear.has(y)) byYear.set(y, []);
     byYear.get(y).push(p);
   }
-  for (const [year, list] of [...byYear].sort((a, b) => (a[0] < b[0] ? 1 : -1))) {
-    lines.push(`**${year}**`, '');
-    for (const p of list) {
+  for (const [year, items] of [...byYear].sort((a, b) => (a[0] < b[0] ? 1 : -1))) {
+    out.push(`**${year}**`, '');
+    for (const p of items) {
       const tags = (p.tags ?? []).map((t) => `\`${t}\``).join(' ');
-      lines.push(`- ${p.date} · [${p.title}](${p.rel}) — ${p.excerpt}${tags ? ' ' + tags : ''}`);
+      out.push(`- ${p.date} · [${p.title}](${p.rel}) — ${p.excerpt}${tags ? ' ' + tags : ''}`);
     }
-    lines.push('');
+    out.push('');
   }
-  lines.push(`_共 ${published.length} 篇已发布${draftCount ? `，另有 ${draftCount} 篇在写` : ''}。_`);
+  return out;
 }
+
+const zhList = published.filter((p) => (p.lang ?? 'zh') === 'zh');
+const enList = published.filter((p) => p.lang === 'en');
+const lines = [];
+if (published.length === 0) {
+  lines.push('_还没有文章。_');
+} else if (zhList.length && enList.length) {
+  lines.push('### 中文', '', ...renderGroup(zhList), '### English', '', ...renderGroup(enList));
+} else {
+  lines.push(...renderGroup(published));
+}
+const langNote = zhList.length && enList.length ? `（中文 ${zhList.length} 篇，英文 ${enList.length} 篇）` : '';
+const draftNote = draftCount ? `，另有 ${draftCount} 篇在写` : '';
+lines.push(`_共 ${published.length} 篇已发布${langNote}${draftNote}。_`);
 
 const readmePath = path.join(ROOT, 'README.md');
 let readme = existsSync(readmePath) ? await readFile(readmePath, 'utf8') : `${BEGIN}\n${END}\n`;
