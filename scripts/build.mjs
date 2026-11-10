@@ -156,6 +156,11 @@ const items = published
     </item>`,
   )
   .join('\n');
+// lastBuildDate 用最新文章的日期，而不是"现在"。
+// 用 new Date() 的话每次构建 feed.xml 都会变，CI 就会产生一个空提交。
+const lastBuildLine = published[0]
+  ? `    <lastBuildDate>${new Date(published[0].date).toUTCString()}</lastBuildDate>\n`
+  : '';
 await writeFile(
   path.join(ROOT, 'feed.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
@@ -165,8 +170,7 @@ await writeFile(
     <link>${esc(site || `https://github.com/${meta.repo ?? ''}`)}</link>
     <description>${esc(meta.description ?? '')}</description>
     <language>zh-CN</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-${items}
+${lastBuildLine}${items}
   </channel>
 </rss>
 `,
