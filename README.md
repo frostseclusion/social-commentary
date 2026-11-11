@@ -25,7 +25,7 @@
 
 **2026**
 
-- 2026-06-25 · [Mandopop — The Audience Is Not Blameless](posts/mandopop-audience-not-blameless.md) — Criticism of Mandopop never stops, but the idea that the audience is blameless rarely gets questioned. Three kinds of listeners say otherwise.
+- 2026-06-25 · [Mandopop — The Audience Is Not Blameless](posts/mandopop-audience-not-blameless.md) — Criticism of Mandopop never stops, but the idea that the audience is blameless rarely gets questioned. Three kinds of listeners say otherwise. `Mandopop` `listeners` `cultural criticism`
 
 _共 4 篇已发布（中文 3 篇，英文 1 篇）。_
 <!-- END:POSTS -->
