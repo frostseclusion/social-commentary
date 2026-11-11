@@ -2,32 +2,16 @@
 
 > 看看身边那些被当成理所当然的事。
 
-「雪蘅的文集」的一个分册。文学评论在 [literary-criticism](https://github.com/frostseclusion/literary-criticism)，两个分册的汇总在 [essays](https://github.com/frostseclusion/essays)。
+「雪蘅的文集」的一个分册。文艺评论在 [arts-criticism](https://github.com/frostseclusion/arts-criticism)，两个分册的汇总在 [essays](https://github.com/frostseclusion/essays)。
 
 ## 目录
 
 <!-- BEGIN:POSTS -->
-### 中文
-
-**2026**
-
-- 2026-06-01 · [华语乐坛：听众并不无辜](posts/mandopop-the-audience-is-not-blameless.md) — 华语乐坛很糟糕，幸好听众也是。 `流行音乐` `听众` `文化批评`
-
 **2025**
 
 - 2025-06-01 · [论我为什么不喜欢辩论赛——以及为什么私人辩论是更优解](posts/against-debate-competitions.md) — 在我高中毕业之前学校的辩论社解散了——我非常高兴。 `辩论` `公共讨论`
 
-**2024**
-
-- 2024-10-01 · [现代人音乐审美自救办法](posts/how-to-save-your-musical-taste.md) — 想拯救自己的审美，多少年都来得及。 `流行音乐` `审美`
-
-### English
-
-**2026**
-
-- 2026-06-25 · [Mandopop — The Audience Is Not Blameless](posts/mandopop-the-audience-is-not-blameless-en.md) — Mandopop is awful. Fortunately, so is the audience. `Mandopop` `listeners` `cultural criticism`
-
-_共 4 篇已发布（中文 3 篇，英文 1 篇）。_
+_共 1 篇已发布。_
 <!-- END:POSTS -->
 
 ## 关于
