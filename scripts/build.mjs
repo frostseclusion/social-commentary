@@ -79,6 +79,10 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
     warnings.push(`${rel}: 英文文章没有写 translation_of，读者找不到对应的中文版`);
   }
   if (data.date && Number.isNaN(Date.parse(data.date))) errors.push(`${rel}: date 无法解析`);
+  if (data.updated && Number.isNaN(Date.parse(data.updated))) errors.push(`${rel}: updated 无法解析`);
+  if (data.date && data.updated && Date.parse(data.updated) < Date.parse(data.date)) {
+    errors.push(`${rel}: updated（${data.updated}）早于 date（${data.date}），检查一下年份有没有写错`);
+  }
   if (/^#\s/.test(body.trimStart())) {
     errors.push(`${rel}: 正文不要再写一级标题（#），标题由 frontmatter 的 title 提供，否则页面里会出现两个标题`);
   }
