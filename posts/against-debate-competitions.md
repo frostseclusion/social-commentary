@@ -1,6 +1,6 @@
 ---
 title: 论我为什么不喜欢辩论赛——以及为什么私人辩论是更优解
-slug: bu-xihuan-bianlunsai
+slug: against-debate-competitions
 date: 2025-06-01
 status: published
 summary: 辩论赛引入评委、放任诡辩、把复杂问题压成二元对立；私人辩论没有这些毛病。

@@ -1,12 +1,12 @@
 ---
 title: Mandopop — The Audience Is Not Blameless
-slug: mandopop-audience-not-blameless
+slug: mandopop-the-audience-is-not-blameless-en
 date: 2026-06-25
 status: published
 summary: Criticism of Mandopop never stops, but the idea that the audience is blameless rarely gets questioned. Three kinds of listeners say otherwise.
 tags: [Mandopop, listeners, cultural criticism]
 lang: en
-translation_of: huayu-yuetan-tingzhong
+translation_of: mandopop-the-audience-is-not-blameless
 license: CC-BY-NC-SA-4.0
 ---
 

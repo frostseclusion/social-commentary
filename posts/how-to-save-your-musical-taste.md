@@ -1,6 +1,6 @@
 ---
 title: 现代人音乐审美自救办法
-slug: yinyue-shenmei-zijiu
+slug: how-to-save-your-musical-taste
 date: 2024-10-01
 status: published
 summary: 从别看歌词、重夺注意力、按专辑听歌到打开心态，一套把歌听深的办法。

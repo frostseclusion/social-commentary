@@ -1,6 +1,6 @@
 ---
 title: 华语乐坛：听众并不无辜
-slug: huayu-yuetan-tingzhong
+slug: mandopop-the-audience-is-not-blameless
 date: 2026-06-01
 status: published
 summary: 批评华语乐坛的声音从不缺席，但“听众无辜”这条公理没人质疑。这篇举三种人：厚古薄今的、只听词的、动辄觉得被冒犯的。
