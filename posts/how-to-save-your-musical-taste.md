@@ -2,8 +2,9 @@
 title: 现代人音乐审美自救办法
 slug: how-to-save-your-musical-taste
 date: 2024-10-01
+updated: 2026-11-11
 status: published
-summary: 从别看歌词、重夺注意力、按专辑听歌到打开心态，一套把歌听深的办法。
+summary: 想拯救自己的审美，多少年都来得及。
 tags: [流行音乐, 审美]
 license: CC-BY-NC-SA-4.0
 ---

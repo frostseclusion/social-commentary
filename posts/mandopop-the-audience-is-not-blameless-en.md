@@ -2,8 +2,9 @@
 title: Mandopop — The Audience Is Not Blameless
 slug: mandopop-the-audience-is-not-blameless-en
 date: 2026-06-25
+updated: 2026-11-11
 status: published
-summary: Criticism of Mandopop never stops, but the idea that the audience is blameless rarely gets questioned. Three kinds of listeners say otherwise.
+summary: Mandopop is awful. Fortunately, so is the audience.
 tags: [Mandopop, listeners, cultural criticism]
 lang: en
 translation_of: mandopop-the-audience-is-not-blameless
@@ -20,21 +21,21 @@ First in line are those who worship the past and disparage the present. I say �
 
 How far do these past-worshippers go? Their breadth of listening is likely the thinnest of any group — yet they are among the most eager to pontificate and play the critic. I have a perfect example. The Bilibili creator @HOPICO runs one of the best music media channels on the Chinese internet, especially since launching the HMA (HOPICO Music Awards), which honors the best Chinese-language albums each year. Just as viewers were delighting in discovering hidden gems, in shuffled the nostalgia brigade — young, middle-aged, old alike — trailing the rotten stench of the grave, green fluid seeping from the corners of their mouths as they struggled to raise their crumbling skeletal arms and declare:
 
-“You can barely scrape together ten good Chinese songs, so picking forty good albums is honestly impressive.”
+> “You can barely scrape together ten good Chinese songs, so picking forty good albums is honestly impressive.”
+>
+> “Feels completely disconnected from pop music. I’ve never heard of a single one of these albums or artists.”
+>
+> “If it’s pop music, why isn’t it popular?!”
+>
+> “Honestly I’m only here for HOPICO’s video editing and Zhou Yang (author’s note: HOPICO’s host). I don’t know any of these nominees or winners, and I’m not going to listen to them either. I’m past the age of listening to ‘new songs’ and don’t really care to learn.”
+>
+> “What am I supposed to do with this? It all feels way too niche. Doesn’t even qualify as pop.”
+>
+> “What’s the point if they’re all niche albums?”
+>
+> “This is basically just a niche-music gala, an alternative-pop gathering.”
 
-“Feels completely disconnected from pop music. I’ve never heard of a single one of these albums or artists.”
-
-“If it’s pop music, why isn’t it popular?!”
-
-“Honestly I’m only here for HOPICO’s video editing and Zhou Yang. I don’t know any of these nominees or winners, and I’m not going to listen to them either. I’m past the age of listening to ‘new songs’ and don’t really care to learn.”
-
-“What am I supposed to do with this? It all feels way too niche. Doesn’t even qualify as pop.”
-
-“What’s the point if they’re all niche albums?”
-
-“This is basically just a niche-music gala, an alternative-pop gathering.”
-
-*(All of the above are quoted verbatim from the comment sections of HOPICO’s two videos on the 2025 HMA.)*
+(All of the above are quoted verbatim, except for the author’s note identifying Zhou Yang, from the comment sections of HOPICO’s two videos on the 2025 HMA.)
 
 Some go even further, openly sneering: “Honestly, not as good as…” followed by the name of a Taiwanese pop star who blew up in the 2000s.
 
@@ -68,11 +69,11 @@ The third group I want to call out overlaps considerably with the first.
 
 These people suffer from a widespread persecution complex. The symptoms: you’re having a perfectly normal discussion about music; you mention a concept they don’t understand, or simply name an album they’ve never heard; and they instantly trigger their defense mechanisms:
 
-“Oh, here comes Mr. Niche.”
-
-“Look at that superiority complex.”
-
-“If ordinary people like it, who the hell do you think you are?”
+> “Oh, here comes Mr. Niche.”
+>
+> “Look at that superiority complex.”
+>
+> “If ordinary people like it, who the hell do you think you are?”
 
 Then they turn around and accuse you of aesthetic bullying.
 
