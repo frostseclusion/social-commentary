@@ -78,6 +78,11 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
   if (data.status === 'published' && data.lang === 'en' && !data.translation_of) {
     warnings.push(`${rel}: 英文文章没有写 translation_of，读者找不到对应的中文版`);
   }
+  if (data.tags && !Array.isArray(data.tags)) {
+    errors.push(`${rel}: tags 必须写成数组，例：tags: [小说, 阅读史]（只写一个也要方括号）`);
+  } else if (Array.isArray(data.tags) && data.tags.some((t) => /[，、；]/.test(t))) {
+    errors.push(`${rel}: tags 里出现了全角逗号，YAML 数组的分隔符必须是半角逗号（例：[小说, 阅读史]）`);
+  }
   if (data.date && Number.isNaN(Date.parse(data.date))) errors.push(`${rel}: date 无法解析`);
   if (data.updated && Number.isNaN(Date.parse(data.updated))) errors.push(`${rel}: updated 无法解析`);
   if (data.date && data.updated && Date.parse(data.updated) < Date.parse(data.date)) {
