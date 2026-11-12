@@ -75,8 +75,8 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
   if (data.lang && !['zh', 'en'].includes(data.lang)) {
     errors.push(`${rel}: lang 只能是 zh（中文，可省略）或 en（英文）`);
   }
-  if (data.status === 'published' && data.lang === 'en' && !data.translation_of) {
-    warnings.push(`${rel}: 英文文章没有写 translation_of，读者找不到对应的中文版`);
+  if (data.lang === 'en' && !data.translation_of) {
+    errors.push(`${rel}: 英文文章必须写 translation_of，指向中文版的 slug`);
   }
   if (data.tags && !Array.isArray(data.tags)) {
     errors.push(`${rel}: tags 必须写成数组，例：tags: [小说, 阅读史]（只写一个也要方括号）`);
