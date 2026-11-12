@@ -1,10 +1,12 @@
 ---
 title: 论我为什么不喜欢辩论赛——以及为什么私人辩论是更优解
+author: 雪蘅
 slug: against-debate-competitions
 date: 2025-06-01
 updated: 2026-11-11
 status: published
 summary: 在我高中毕业之前学校的辩论社解散了——我非常高兴。
+words: 2718
 tags: [辩论, 公共讨论]
 lang: zh
 license: CC-BY-NC-SA-4.0

@@ -97,8 +97,19 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
     const abs = path.resolve(path.dirname(path.join(POSTS, file)), decodeURIComponent(src));
     if (!existsSync(abs)) errors.push(`${rel}: 图片不存在 → ${src}`);
   }
-  const words = body.replace(/[\s#>*`\-|]/g, '').length;
-  posts.push({ ...data, rel, words, excerpt: data.summary ?? '' });
+  posts.push({ ...data, rel, body, excerpt: data.summary ?? '' });
+}
+
+// 正文字数：中文按字符（汉字/字母/数字各算 1），英文按单词。
+function countWords(body, lang) {
+  if (lang === 'en') {
+    return body.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length;
+  }
+  return [...body].filter((c) => /[\p{L}\p{N}]/u.test(c)).length;
+}
+
+for (const p of posts) {
+  p.words = countWords(p.body, p.lang ?? 'zh');
 }
 
 const seen = new Set();
@@ -122,6 +133,29 @@ for (const w of warnings) console.warn('  ! ' + w);
 if (errors.length || CHECK_ONLY) {
   if (!errors.length) console.log(`✓ 校验通过，${posts.filter((p) => p.status === 'published').length} 篇已发布`);
   process.exit(errors.length ? 1 : 0);
+}
+
+/* ---------- 把 words 写回 frontmatter（幂等，值没变就不动） ---------- */
+
+async function syncWordCount(p) {
+  const file = path.join(POSTS, path.basename(p.rel));
+  const raw = await readFile(file, 'utf8');
+  const line = `words: ${p.words}`;
+  const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!fm) return;
+  const body = fm[1];
+  let next;
+  if (/^words:/m.test(body)) {
+    if (new RegExp(`^words:\\s*${p.words}\\s*$`, 'm').test(body)) return;
+    next = body.replace(/^words:.*$/m, line);
+  } else {
+    next = body.replace(/^(summary:.*)$/m, `$1\n${line}`);
+  }
+  await writeFile(file, raw.replace(fm[0], `---\n${next}\n---`));
+}
+
+if (!CHECK_ONLY) {
+  for (const p of posts) await syncWordCount(p);
 }
 
 /* ---------- README 目录块 ---------- */
