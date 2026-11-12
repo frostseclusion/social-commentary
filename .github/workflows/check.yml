@@ -1,7 +1,10 @@
 name: check
 
-# 每次改动文章就跑一次自检：frontmatter 是否齐全、slug 是否重复、图片是否真的存在。
-# 校验通过后顺手把 README 目录和 feed 重排一遍并提交回去 —— 目录永远不用手写。
+# 每次改动文章跑一次：frontmatter 校验 + 检查生成物（README 目录、feed.xml）是否和文章一致。
+#
+# 这个工作流**不写仓库**。目录和 feed 由本地构建生成、和文章一起提交；CI 只负责发现
+# "你忘了跑 build" 这种情况。以前它会在 CI 里重建并推回仓库，结果会和本地推送撞车
+# （远端已经被本地更新，CI 的 push 被拒）—— 2026-11-12 改成只检查。
 
 on:
   push:
@@ -10,7 +13,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   check:
@@ -22,19 +25,15 @@ jobs:
         with:
           node-version: 22
 
-      - name: 校验
+      - name: 校验 frontmatter 与文章
         run: node scripts/build.mjs --check
 
-      - name: 重建目录与 feed
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: 检查生成物是否已更新
         run: |
           node scripts/build.mjs
           if ! git diff --quiet -- README.md feed.xml; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add README.md feed.xml
-            git commit -m "chore: 重建目录与 feed [skip ci]"
-            git push
-          else
-            echo "目录无变化，跳过提交"
+            echo "::error::README 的目录或 feed.xml 与文章内容不一致。本地跑一次 node scripts/build.mjs，把结果和文章一起提交。"
+            git diff --stat
+            exit 1
           fi
+          echo "生成物是最新的"
