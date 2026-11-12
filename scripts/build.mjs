@@ -60,8 +60,11 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
   const raw = await readFile(path.join(POSTS, file), 'utf8');
   const { data, body } = parseFrontmatter(raw);
 
-  for (const k of ['title', 'slug', 'date', 'status', 'summary']) {
+  for (const k of ['title', 'author', 'slug', 'date', 'status', 'summary', 'lang', 'license']) {
     if (!data[k]) errors.push(`${rel}: 缺少 frontmatter 字段 ${k}`);
+  }
+  if (!Array.isArray(data.tags) || data.tags.length === 0) {
+    errors.push(`${rel}: 缺少 frontmatter 字段 tags（至少写一个）`);
   }
   if (data.slug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(data.slug)) {
     errors.push(`${rel}: slug 只允许小写字母、数字和连字符（例：shuminghao-lide-shijie）`);
@@ -118,10 +121,20 @@ for (const p of posts) {
   if (seen.has(p.slug)) errors.push(`slug 重复：${p.slug}`);
   seen.add(p.slug);
 }
+const bySlug = new Map(posts.filter((p) => p.slug).map((p) => [p.slug, p]));
 for (const p of posts) {
   if (!p.translation_of) continue;
   if (p.translation_of === p.slug) errors.push(`${p.rel}: translation_of 不能指向自己`);
   else if (!seen.has(p.translation_of)) errors.push(`${p.rel}: translation_of 指向的 ${p.translation_of} 不存在`);
+  else {
+    // 双语 tag 一一对应：数量必须相同，语义对应靠作者自己保证
+    const other = bySlug.get(p.translation_of);
+    const n1 = Array.isArray(p.tags) ? p.tags.length : 0;
+    const n2 = Array.isArray(other.tags) ? other.tags.length : 0;
+    if (n1 !== n2) {
+      errors.push(`${p.rel}: 与 ${other.rel} 的 tags 数量不一致（${n1} 对 ${n2}），双语标签要一一对应`);
+    }
+  }
 }
 
 if (errors.length) {
