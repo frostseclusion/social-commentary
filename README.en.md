@@ -4,7 +4,7 @@
 
 > A look at the things around us that are taken for granted.
 
-One volume of [Xue Heng's Collected Essays](https://github.com/frostseclusion/essays). Arts criticism lives in [arts-criticism](https://github.com/frostseclusion/arts-criticism).
+One volume of [Frostseclusion's Collected Essays](https://github.com/frostseclusion/essays). Arts criticism lives in [arts-criticism](https://github.com/frostseclusion/arts-criticism).
 
 ## Contents
 
