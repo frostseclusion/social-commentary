@@ -4,7 +4,7 @@
 
 > 看看身边那些被当成理所当然的事。
 
-「雪蘅的文集」的一个分册。文艺评论在 [arts-criticism](https://github.com/frostseclusion/arts-criticism)，两个分册的汇总在 [essays](https://github.com/frostseclusion/essays)。
+“雪蘅的文集”的一个分册。文艺评论在 [arts-criticism](https://github.com/frostseclusion/arts-criticism)，两个分册的汇总在 [essays](https://github.com/frostseclusion/essays)。
 
 ## 目录
 
