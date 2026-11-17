@@ -91,9 +91,6 @@ for (const file of (await readdir(POSTS)).filter((f) => f.endsWith('.md')).sort(
   if (data.date && data.updated && Date.parse(data.updated) < Date.parse(data.date)) {
     errors.push(`${rel}: updated（${data.updated}）早于 date（${data.date}），检查一下年份有没有写错`);
   }
-  if (/^#\s/.test(body.trimStart())) {
-    errors.push(`${rel}: 正文不要再写一级标题（#），标题由 frontmatter 的 title 提供，否则页面里会出现两个标题`);
-  }
   for (const m of body.matchAll(/!\[[^\]]*\]\(([^)\s]+)[^)]*\)/g)) {
     const src = m[1];
     if (/^(https?:)?\/\//.test(src) || src.startsWith('data:')) continue;
