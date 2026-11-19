@@ -31,7 +31,7 @@ jobs:
       - name: 检查生成物是否已更新
         run: |
           node scripts/build.mjs
-          if ! git diff --quiet -- README.md feed.xml; then
+          if ! git diff --quiet -- README.md README.en.md feed.xml; then
             echo "::error::README 的目录或 feed.xml 与文章内容不一致。本地跑一次 node scripts/build.mjs，把结果和文章一起提交。"
             git diff --stat
             exit 1

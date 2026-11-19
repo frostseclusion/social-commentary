@@ -8,7 +8,13 @@ One volume of [Frostseclusion’s Collected Essays](https://github.com/frostsecl
 
 ## Contents
 
-The post index is generated in the [Chinese README](README.md#目录) and kept up to date there; this English page does not duplicate it. All posts live in [`posts/`](posts/).
+<!-- BEGIN:POSTS -->
+**2025**
+
+- 2025-06-01 · [论我为什么不喜欢辩论赛——以及为什么私人辩论是更优解](posts/against-debate-competitions.md) — 在我高中毕业之前学校的辩论社解散了——我非常高兴。 `辩论` `公共讨论`
+
+_1 post published._
+<!-- END:POSTS -->
 
 ## About
 

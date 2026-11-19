@@ -195,26 +195,50 @@ function renderGroup(list) {
 
 const zhList = published.filter((p) => (p.lang ?? 'zh') === 'zh');
 const enList = published.filter((p) => p.lang === 'en');
-const lines = [];
-if (published.length === 0) {
-  lines.push('_还没有文章。_');
-} else if (zhList.length && enList.length) {
-  lines.push('### 中文', '', ...renderGroup(zhList), '### English', '', ...renderGroup(enList));
-} else {
-  lines.push(...renderGroup(published));
-}
-const langNote = zhList.length && enList.length ? `（中文 ${zhList.length} 篇，英文 ${enList.length} 篇）` : '';
-const draftNote = draftCount ? `，另有 ${draftCount} 篇在写` : '';
-lines.push(`_共 ${published.length} 篇已发布${langNote}${draftNote}。_`);
 
-const readmePath = path.join(ROOT, 'README.md');
-let readme = existsSync(readmePath) ? await readFile(readmePath, 'utf8') : `${BEGIN}\n${END}\n`;
-if (!readme.includes(BEGIN) || !readme.includes(END)) {
-  console.error(`README.md 里找不到 ${BEGIN} / ${END} 标记，拒绝覆盖（手写目录早晚会腐烂，所以目录必须自动生成）`);
-  process.exit(1);
+// 条目两种语言共用；只有分节标题和统计行随 README 的语言变。
+function renderIndex(lang) {
+  const lines = [];
+  if (published.length === 0) {
+    lines.push(lang === 'en' ? '_No posts yet._' : '_还没有文章。_');
+  } else if (zhList.length && enList.length) {
+    lines.push(lang === 'en' ? '### Chinese' : '### 中文', '', ...renderGroup(zhList), '### English', '', ...renderGroup(enList));
+  } else {
+    lines.push(...renderGroup(published));
+  }
+  const both = zhList.length && enList.length;
+  if (lang === 'en') {
+    const counts = both ? ` (${zhList.length} Chinese, ${enList.length} English)` : '';
+    const draftNote = draftCount ? `, ${draftCount} in progress` : '';
+    lines.push(`_${published.length} ${published.length === 1 ? 'post' : 'posts'} published${counts}${draftNote}._`);
+  } else {
+    const counts = both ? `（中文 ${zhList.length} 篇，英文 ${enList.length} 篇）` : '';
+    const draftNote = draftCount ? `，另有 ${draftCount} 篇在写` : '';
+    lines.push(`_共 ${published.length} 篇已发布${counts}${draftNote}。_`);
+  }
+  return lines;
 }
-readme = readme.replace(new RegExp(`${BEGIN}[\\s\\S]*?${END}`), `${BEGIN}\n${lines.join('\n')}\n${END}`);
-await writeFile(readmePath, readme);
+
+// README.md 必须有标记；README.en.md 是可选的（新仓还没写英文版时不该拦着构建）。
+async function writeIndex(file, lang) {
+  const target = path.join(ROOT, file);
+  if (!existsSync(target)) {
+    console.warn(`  ! 没有 ${file}，跳过${lang === 'en' ? '英文' : '中文'}目录`);
+    return;
+  }
+  const text = await readFile(target, 'utf8');
+  if (!text.includes(BEGIN) || !text.includes(END)) {
+    console.error(`${file} 里找不到 ${BEGIN} / ${END} 标记，拒绝覆盖（手写目录早晚会腐烂，所以目录必须自动生成）`);
+    process.exit(1);
+  }
+  await writeFile(
+    target,
+    text.replace(new RegExp(`${BEGIN}[\\s\\S]*?${END}`), `${BEGIN}\n${renderIndex(lang).join('\n')}\n${END}`),
+  );
+}
+
+await writeIndex('README.md', 'zh');
+await writeIndex('README.en.md', 'en');
 
 /* ---------- feed.xml（每刊可独立订阅，这是拆仓的价值之一） ---------- */
 
@@ -254,4 +278,4 @@ ${lastBuildLine}${items}
 `,
 );
 
-console.log(`✓ 已更新 README.md 目录（${published.length} 篇）并生成 feed.xml`);
+console.log(`✓ 已更新 README.md / README.en.md 目录（${published.length} 篇）并生成 feed.xml`);
