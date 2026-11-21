@@ -23,6 +23,9 @@ const meta = existsSync(path.join(ROOT, 'meta.json'))
   ? JSON.parse(await readFile(path.join(ROOT, 'meta.json'), 'utf8'))
   : {};
 
+// 生成的英文文案也遵守 AP：1–9 拼写、10 及以上用数字
+const numWord = (n) => (n > 0 && n < 10 ? ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'][n] : String(n));
+
 function unquote(s) {
   if (s.length >= 2 && ((s[0] === '"' && s.at(-1) === '"') || (s[0] === "'" && s.at(-1) === "'"))) return s.slice(1, -1);
   return s;
@@ -208,9 +211,9 @@ function renderIndex(lang) {
   }
   const both = zhList.length && enList.length;
   if (lang === 'en') {
-    const counts = both ? ` (${zhList.length} Chinese, ${enList.length} English)` : '';
-    const draftNote = draftCount ? `, ${draftCount} in progress` : '';
-    lines.push(`_${published.length} ${published.length === 1 ? 'post' : 'posts'} published${counts}${draftNote}._`);
+    const counts = both ? ` (${numWord(zhList.length)} Chinese, ${numWord(enList.length)} English)` : '';
+    const draftNote = draftCount ? `, ${numWord(draftCount)} in progress` : '';
+    lines.push(`_${numWord(published.length)} ${published.length === 1 ? 'post' : 'posts'} published${counts}${draftNote}._`);
   } else {
     const counts = both ? `（中文 ${zhList.length} 篇，英文 ${enList.length} 篇）` : '';
     const draftNote = draftCount ? `，另有 ${draftCount} 篇在写` : '';
